@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Private 30-Minute Fitness Strategy Session — Tyrone Nieuwoudt</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #080808;
+  --charcoal: #0f0f0f;
+  --surface: #141414;
+  --surface-2: #1c1c1c;
+  --border: #222222;
+  --border-light: #2e2e2e;
+  --gold: #c9a96e;
+  --gold-light: #e8d5b0;
+  --gold-glow: rgba(201,169,110,0.15);
+  --white: #f5f2ec;
+  --white-dim: rgba(245,242,236,0.65);
+  --muted: #6a6a62;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Jost', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--sans);
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* CUSTOM CURSOR */
+.cursor {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease;
+}
+
+.cursor-ring {
+  position: fixed;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(201,169,110,0.4);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s ease, width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
+}
+
+body:hover .cursor-ring { opacity: 1; }
+
+/* NOISE OVERLAY */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.4;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 24px 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to bottom, rgba(8,8,8,0.97), transparent);
+}
+
+.nav-logo {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  color: var(--gold);
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.nav-tagline {
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* HERO — SPLIT LAYOUT */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ANIMATED GOLD PARTICLES */
+.particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.particle {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  background: var(--gold);
+  border-radius: 50%;
+  animation: float var(--dur) ease-in-out infinite var(--delay);
+  opacity: 0;
+}
+
+@keyframes float {
+  0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.3; }
+  100% { transform: translateY(-20px) translateX(var(--drift)); opacity: 0; }
+}
+
+/* HERO VISUAL SIDE */
+.hero-visual {
+  position: relative;
+  background: var(--charcoal);
+  overflow: hidden;
+}
+
+.hero-visual-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 50%, rgba(201,169,110,0.06) 0%, transparent 70%),
+    linear-gradient(135deg, rgba(201,169,110,0.04) 0%, transparent 50%);
+}
+
+.hero-visual-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(201,169,110,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,169,110,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: gridShift 20s linear infinite;
+}
+
+@keyframes gridShift {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(60px); }
+}
+
+.hero-big-number {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  font-family: var(--serif);
+  font-size: 220px;
+  font-weight: 300;
+  color: rgba(201,169,110,0.06);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  z-index: 2;
+  animation: pulseNum 4s ease-in-out infinite;
+}
+
+@keyframes pulseNum {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.hero-quote {
+  position: absolute;
+  bottom: 80px;
+  left: 48px;
+  z-index: 3;
+  max-width: 300px;
+}
+
+.hero-quote p {
+  font-family: var(--serif);
+  font-size: 15px;
+  font-style: italic;
+  color: var(--gold-light);
+  line-height: 1.7;
+  opacity: 0.5;
+}
+
+/* ANIMATED LINES */
+.hero-lines-animated {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.h-line {
+  position: absolute;
+  left: -100%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  opacity: 0;
+  animation: lineSweep 6s ease-in-out infinite;
+}
+
+.h-line:nth-child(1) { top: 30%; width: 60%; animation-delay: 0s; }
+.h-line:nth-child(2) { top: 55%; width: 80%; animation-delay: 2s; }
+.h-line:nth-child(3) { top: 75%; width: 40%; animation-delay: 4s; }
+
+@keyframes lineSweep {
+  0% { left: -100%; opacity: 0; }
+  20% { opacity: 0.3; }
+  80% { opacity: 0.3; }
+  100% { left: 100%; opacity: 0; }
+}
+
+/* HERO CONTENT */
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 120px 64px 80px;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  opacity: 0;
+  animation: fadeUp 0.9s ease 0.1s forwards;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--gold);
+}
+
+h1 {
+  font-family: var(--serif);
+  font-size: clamp(38px, 4.5vw, 58px);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--white);
+  margin-bottom: 28px;
+  letter-spacing: -0.01em;
+  opacity: 0;
+  animation: fadeUp 0.9s ease 0.25s forwards;
+}
+
+h1 em {
+  font-style: italic;
+  color: var(--gold-light);
+  display: block;
+}
+
+.hero-sub {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.9;
+  margin-bottom: 48px;
+  max-width: 400px;
+  font-weight: 300;
+  border-left: 1px solid var(--border-light);
+  padding-left: 20px;
+  opacity: 0;
+  animation: fadeUp 0.9s ease 0.4s forwards;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* FORM CARD */
+.form-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 36px;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  animation: fadeUp 0.9s ease 0.55s forwards;
+}
+
+.form-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+}
+
+.form-card::after {
+  content: '';
+  position: absolute;
+  bottom: -80px;
+  right: -80px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,169,110,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.form-title {
+  font-family: var(--serif);
+  font-size: 21px;
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+
+.form-note {
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 24px;
+  letter-spacing: 0.05em;
+  line-height: 1.6;
+}
+
+.form-note span { color: var(--gold); }
+
+.form-group {
+  margin-bottom: 14px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.form-group input {
+  width: 100%;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border);
+  color: var(--white);
+  padding: 13px 16px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 300;
+  outline: none;
+  transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus {
+  border-color: var(--gold);
+  background: rgba(201,169,110,0.03);
+  box-shadow: 0 0 20px rgba(201,169,110,0.08);
+}
+
+.form-group input::placeholder { color: rgba(106,106,98,0.5); }
+
+.btn-primary {
+  width: 100%;
+  background: var(--gold);
+  color: var(--black);
+  border: none;
+  padding: 15px 32px;
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  cursor: none;
+  transition: all 0.3s;
+  margin-top: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-primary:hover::before { left: 100%; }
+.btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,169,110,0.2); }
+
+.form-privacy {
+  font-size: 10px;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 14px;
+  opacity: 0.5;
+  letter-spacing: 0.05em;
+}
+
+/* SECTION BASE */
+.section { padding: 100px 0; }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 56px; }
+
+.section-label {
+  font-size: 9px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.section-label::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: var(--border-light);
+}
+
+/* PAIN POINTS */
+.pain-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.pain-heading {
+  font-family: var(--serif);
+  font-size: clamp(28px, 3vw, 42px);
+  font-weight: 300;
+  line-height: 1.25;
+  color: var(--white);
+}
+
+.pain-heading em {
+  font-style: italic;
+  color: var(--gold-light);
+  display: block;
+}
+
+.gold-line {
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+  margin: 28px 0;
+  opacity: 0.5;
+}
+
+.pain-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.9;
+  max-width: 380px;
+}
+
+.pain-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.pain-list li {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 20px;
+  border: 1px solid transparent;
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.pain-list li:hover {
+  border-color: var(--border-light);
+  background: rgba(201,169,110,0.02);
+}
+
+.pain-icon {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: border-color 0.3s;
+}
+
+.pain-list li:hover .pain-icon { border-color: var(--gold); }
+
+.pain-icon svg {
+  width: 14px;
+  height: 14px;
+  stroke: var(--gold);
+  fill: none;
+  stroke-width: 1.5;
+}
+
+.pain-list-text strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--white);
+  margin-bottom: 4px;
+  letter-spacing: 0.02em;
+}
+
+.pain-list-text span {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* DELIVERS */
+.delivers-section {
+  background: var(--charcoal);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 80px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.delivers-section::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(201,169,110,0.03) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.delivers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+
+.deliver-item {
+  padding: 56px 44px;
+  border-right: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+  transition: background 0.4s;
+}
+
+.deliver-item::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  transform: scaleX(0);
+  transition: transform 0.4s;
+}
+
+.deliver-item:hover::before { transform: scaleX(1); }
+.deliver-item:hover { background: rgba(201,169,110,0.02); }
+.deliver-item:last-child { border-right: none; }
+
+.deliver-number {
+  font-family: var(--serif);
+  font-size: 52px;
+  font-weight: 300;
+  color: rgba(201,169,110,0.12);
+  line-height: 1;
+  margin-bottom: 20px;
+  transition: color 0.4s;
+}
+
+.deliver-item:hover .deliver-number { color: rgba(201,169,110,0.25); }
+
+.deliver-title {
+  font-family: var(--serif);
+  font-size: 21px;
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+
+.deliver-body {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.85;
+}
+
+/* TESTIMONIALS */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-top: 56px;
+  background: var(--border);
+}
+
+.testimonial {
+  background: var(--surface);
+  padding: 48px 44px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s;
+}
+
+.testimonial::before {
+  content: '"';
+  font-family: var(--serif);
+  font-size: 100px;
+  color: var(--gold);
+  opacity: 0.08;
+  position: absolute;
+  top: 16px;
+  left: 36px;
+  line-height: 1;
+  transition: opacity 0.3s;
+}
+
+.testimonial:hover { background: var(--surface-2); }
+.testimonial:hover::before { opacity: 0.14; }
+
+.testimonial-shine {
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(201,169,110,0.03), transparent);
+  transition: left 0.6s ease;
+}
+
+.testimonial:hover .testimonial-shine { left: 150%; }
+
+.testimonial-text {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--white-dim);
+  line-height: 1.75;
+  margin-bottom: 24px;
+  padding-top: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.testimonial-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  position: relative;
+  z-index: 1;
+}
+
+.testimonial-name {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.testimonial-context { font-size: 11px; color: var(--muted); }
+
+/* FINAL CTA */
+.cta-section {
+  text-align: center;
+  padding: 140px 56px;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,169,110,0.05) 0%, transparent 70%);
+  animation: breathe 5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes breathe {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.1); }
+}
+
+.cta-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-heading {
+  font-family: var(--serif);
+  font-size: clamp(34px, 4.5vw, 56px);
+  font-weight: 300;
+  color: var(--white);
+  margin-bottom: 16px;
+  line-height: 1.2;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-heading em {
+  font-style: italic;
+  color: var(--gold-light);
+}
+
+.cta-sub {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 48px;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.85;
+  position: relative;
+  z-index: 1;
+}
+
+.btn-cta {
+  display: inline-block;
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  padding: 18px 56px;
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  cursor: none;
+  text-decoration: none;
+  transition: all 0.4s;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+  z-index: -1;
+}
+
+.btn-cta:hover {
+  color: var(--black);
+  box-shadow: 0 0 40px rgba(201,169,110,0.2);
+}
+
+.btn-cta:hover::before { transform: scaleX(1); }
+
+.cta-scarcity {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-top: 32px;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-scarcity::before, .cta-scarcity::after {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.5;
+}
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 40px 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-logo { font-family: var(--serif); font-size: 17px; color: var(--gold); letter-spacing: 0.1em; }
+.footer-copy { font-size: 10px; color: var(--muted); letter-spacing: 0.1em; }
+
+/* SCROLL REVEAL */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  nav { padding: 20px 24px; }
+  .hero { grid-template-columns: 1fr; }
+  .hero-visual { display: none; }
+  .hero-content { padding: 120px 28px 60px; }
+  .pain-grid { grid-template-columns: 1fr; gap: 48px; }
+  .delivers-grid { grid-template-columns: 1fr; }
+  .deliver-item { border-right: none; border-bottom: 1px solid var(--border); }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .cta-section { padding: 100px 24px; }
+  footer { flex-direction: column; gap: 16px; text-align: center; }
+  .container { padding: 0 24px; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- PARTICLES -->
+<div class="particles" id="particles"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Tyrone Nieuwoudt</a>
+  <span class="nav-tagline">Bespoke Wellness Concierge</span>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-visual">
+    <div class="hero-visual-bg"></div>
+    <div class="hero-visual-grid"></div>
+    <div class="hero-lines-animated">
+      <div class="h-line"></div>
+      <div class="h-line"></div>
+      <div class="h-line"></div>
+    </div>
+    <div class="hero-big-number">30</div>
+    <div class="hero-quote">
+      <p>"The most important investment you will ever make is in the body you live in."</p>
+    </div>
+  </div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Private Strategy Session</p>
+    <h1>Thirty minutes.<br><em>A direction that lasts.</em></h1>
+    <p class="hero-sub">A private, no-obligation conversation with Tyrone. No templates, no sales pitch — just an honest assessment of where you are, where you want to be, and exactly what it would take to get there.</p>
+    <div class="form-card">
+      <p class="form-title">Reserve your session</p>
+      <p class="form-note">Limited availability — Tyrone works with a maximum of <span>4 clients</span> at any time.</p>
+      <form onsubmit="handleSubmit(event)">
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" placeholder="First and last name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="Your private email" required>
+        </div>
+        <button type="submit" class="btn-primary">Request My Private Session</button>
+      </form>
+      <p class="form-privacy">Your details are held in strict confidence and never shared.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN POINTS -->
+<section class="section">
+  <div class="container">
+    <div class="pain-grid">
+      <div class="reveal">
+        <p class="section-label">The Problem</p>
+        <h2 class="pain-heading">Most programmes were never<br><em>designed for you.</em></h2>
+        <div class="gold-line"></div>
+        <p class="pain-desc">You have tried what works for other people. It does not work for you — not because you lack discipline, but because no one has ever taken the time to understand what you specifically need.</p>
+      </div>
+      <ul class="pain-list reveal">
+        <li>
+          <div class="pain-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <div class="pain-list-text">
+            <strong>Generic programmes that plateau after 6 weeks</strong>
+            <span>Mass-market training ignores your schedule, your stress load, and your body's specific response patterns.</span>
+          </div>
+        </li>
+        <li>
+          <div class="pain-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="pain-list-text">
+            <strong>Nutrition advice that contradicts itself</strong>
+            <span>High performers need precision nutrition architecture, not trend-driven advice that changes every quarter.</span>
+          </div>
+        </li>
+        <li>
+          <div class="pain-icon">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="pain-list-text">
+            <strong>Coaches managing 100 clients at once</strong>
+            <span>When you are one of hundreds, you receive a programme. When you work with Tyrone, you receive his full attention.</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT YOU WILL LEAVE WITH -->
+<section class="delivers-section">
+  <div style="padding: 0;">
+    <div class="container" style="margin-bottom: 56px;">
+      <p class="section-label reveal">What You Will Leave With</p>
+      <h2 class="pain-heading reveal" style="max-width:480px;">Thirty minutes of <em>genuine clarity.</em></h2>
+    </div>
+    <div class="delivers-grid">
+      <div class="deliver-item reveal">
+        <div class="deliver-number">01</div>
+        <h3 class="deliver-title">An honest assessment</h3>
+        <p class="deliver-body">Tyrone will tell you exactly where the gaps in your current approach are and why. No flattery, no upselling. Just a clear-eyed view of your situation.</p>
+      </div>
+      <div class="deliver-item reveal">
+        <div class="deliver-number">02</div>
+        <h3 class="deliver-title">A directional plan</h3>
+        <p class="deliver-body">You will leave with a clear sense of what a programme designed specifically for your body, schedule, and goals would look like. This alone is worth the thirty minutes.</p>
+      </div>
+      <div class="deliver-item reveal">
+        <div class="deliver-number">03</div>
+        <h3 class="deliver-title">Complete transparency</h3>
+        <p class="deliver-body">If Tyrone believes he can help you, he will say so and explain exactly how. If he doesn't think the fit is right, he will tell you that too. No obligation, ever.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section class="section">
+  <div class="container">
+    <p class="section-label reveal">In Their Words</p>
+    <h2 class="pain-heading reveal">Results that <em>speak for themselves.</em></h2>
+    <div class="testimonials-grid">
+      <div class="testimonial reveal">
+        <div class="testimonial-shine"></div>
+        <p class="testimonial-text">What sets Tyrone's concierge service apart is his tailored approach. He took the time to understand my unique needs and goals, crafting a customised programme that delivered remarkable results. I'm genuinely thrilled with the progress I've made.</p>
+        <div class="testimonial-meta">
+          <span class="testimonial-name">E. Roniger</span>
+          <span class="testimonial-context">Executive Client — Cape Town</span>
+        </div>
+      </div>
+      <div class="testimonial reveal">
+        <div class="testimonial-shine"></div>
+        <p class="testimonial-text">As someone with a demanding lifestyle, I appreciate the expertise and guidance Tyrone provides. He helped me prioritise my health and wellness, and I've seen significant, lasting improvements in my overall quality of life.</p>
+        <div class="testimonial-meta">
+          <span class="testimonial-name">T. Van Andel</span>
+          <span class="testimonial-context">Professional Client — Remote Programme</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-section">
+  <p class="cta-eyebrow reveal">Begin the conversation</p>
+  <h2 class="cta-heading reveal">The right time<br><em>is rarely convenient.</em></h2>
+  <p class="cta-sub reveal">If you have been considering it, this is the moment. The session is private, unhurried, and costs you nothing but thirty minutes.</p>
+  <a href="#name" class="btn-cta reveal">Reserve My Private Session</a>
+  <p class="cta-scarcity reveal">Maximum 4 clients at any time</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">Tyrone Nieuwoudt</span>
+  <span class="footer-copy">tyronenieuwoudt.com — Cape Town, South Africa</span>
+</footer>
+
+<script>
+// CUSTOM CURSOR
+const cursor = document.getElementById('cursor');
+const cursorRing = document.getElementById('cursorRing');
+let mouseX = 0, mouseY = 0;
+let ringX = 0, ringY = 0;
+
+document.addEventListener('mousemove', e => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+  cursor.style.left = mouseX + 'px';
+  cursor.style.top = mouseY + 'px';
+});
+
+function animateRing() {
+  ringX += (mouseX - ringX) * 0.12;
+  ringY += (mouseY - ringY) * 0.12;
+  cursorRing.style.left = ringX + 'px';
+  cursorRing.style.top = ringY + 'px';
+  requestAnimationFrame(animateRing);
+}
+animateRing();
+
+// Cursor hover effects
+document.querySelectorAll('a, button, input, .pain-list li, .deliver-item, .testimonial').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursorRing.style.width = '60px';
+    cursorRing.style.height = '60px';
+    cursorRing.style.borderColor = 'rgba(201,169,110,0.7)';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursorRing.style.width = '36px';
+    cursorRing.style.height = '36px';
+    cursorRing.style.borderColor = 'rgba(201,169,110,0.4)';
+  });
+});
+
+// PARTICLES
+const particlesContainer = document.getElementById('particles');
+for (let i = 0; i < 30; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  p.style.setProperty('--dur', (8 + Math.random() * 12) + 's');
+  p.style.setProperty('--delay', -(Math.random() * 20) + 's');
+  p.style.setProperty('--drift', (Math.random() * 200 - 100) + 'px');
+  p.style.left = (Math.random() * 100) + '%';
+  p.style.width = (1 + Math.random() * 2) + 'px';
+  p.style.height = p.style.width;
+  particlesContainer.appendChild(p);
+}
+
+// SCROLL REVEAL
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => {
+        entry.target.classList.add('visible');
+      }, i * 80);
+    }
+  });
+}, { threshold: 0.1 });
+
+reveals.forEach(el => observer.observe(el));
+
+// FORM SUBMIT
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.btn-primary');
+  btn.textContent = 'Session Requested';
+  btn.style.background = '#2a2a2a';
+  btn.style.color = 'var(--gold)';
+  btn.style.border = '1px solid var(--gold)';
+  btn.style.cursor = 'none';
+  btn.disabled = true;
+}
+</script>
+</body>
+</html>
